@@ -50,16 +50,16 @@ if [ $TRAVIS_OS_NAME == "osx" ]; then
   OSINFO+=$(sw_vers -buildVersion)
   OSINFO+=")"
   OSINFO+="\\n"
-  OSXIMAGE=TRAVIS_OSX_IMAGE
+  OSXIMAGE=$TRAVIS_OSX_IMAGE
   OSXIMAGE=${OSXIMAGE#e}
   OSINFO+="Xcode "
-  OSINFO+=OSXIMAGE
+  OSINFO+=$OSXIMAGE
 else
   OSINFO=$(lsb_release -a | grep Description: | xargs)
   OSINFO=${OSINFO#*: }
   TEMPVAR2="Worker Info: "
-  TEMPVAR2+=OSINFO
-  OSINFO=TEMPVAR2
+  TEMPVAR2+=$OSINFO
+  OSINFO=$TEMPVAR2
 fi
 
 TIMESTAMP=$(date -u +%FT%TZ)
