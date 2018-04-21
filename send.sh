@@ -53,7 +53,7 @@ else
   OSINFO=${OSINFO#*: }
 fi
 
-TIMESTAMP=$(date --utc +%FT%TZ)
+TIMESTAMP=$(date -u +%FT%TZ)
 WEBHOOK_DATA='{
   "username": "",
   "avatar_url": "https://travis-ci.org/images/logos/TravisCI-Mascot-1.png",
