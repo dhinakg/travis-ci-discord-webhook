@@ -44,13 +44,22 @@ else
 fi
 
 if [ $TRAVIS_OS_NAME == "osx" ]; then
-  OSINFO=$(sw_vers -productVersion)
+  OSINFO="Worker Info:"
+  OSINFO+=$(sw_vers -productVersion)
   OSINFO+=" ("
   OSINFO+=$(sw_vers -buildVersion)
   OSINFO+=")"
+  OSINFO+="\\n"
+  OSXIMAGE=TRAVIS_OSX_IMAGE
+  OSXIMAGE=${OSXIMAGE#e}
+  OSINFO+="Xcode "
+  OSINFO+=OSXIMAGE
 else
   OSINFO=$(lsb_release -a | grep Description: | xargs)
   OSINFO=${OSINFO#*: }
+  TEMPVAR2="Worker Info: "
+  TEMPVAR2+=OSINFO
+  OSINFO=TEMPVAR2
 fi
 
 TIMESTAMP=$(date -u +%FT%TZ)
@@ -66,7 +75,7 @@ WEBHOOK_DATA='{
     },
     "title": "'"$COMMIT_SUBJECT"'",
     "url": "'"$URL"'",
-    "description": "'"${COMMIT_MESSAGE//$'\n'/ }"\\n\\n"$CREDITS"\\n\\n"$OSINFO"'",
+    "description": "'"${COMMIT_MESSAGE//$'\n'/ }"\\n\\n"$CREDITS"\\n"$OSINFO"'",
     "fields": [
       {
         "name": "Commit",
