@@ -44,14 +44,14 @@ else
 fi
 
 if [ $TRAVIS_OS_NAME == "osx" ]; then
-  OSINFO="Worker Info:"
+  OSINFO="Worker Info: "
   OSINFO+=$(sw_vers -productVersion)
   OSINFO+=" ("
   OSINFO+=$(sw_vers -buildVersion)
   OSINFO+=")"
   OSINFO+="\\n"
   OSXIMAGE=$TRAVIS_OSX_IMAGE
-  OSXIMAGE=${OSXIMAGE#e}
+  OSXIMAGE=${OSXIMAGE#*e}
   OSINFO+="Xcode "
   OSINFO+=$OSXIMAGE
 else
