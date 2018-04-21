@@ -43,6 +43,13 @@ else
   URL=""
 fi
 
+if [ $TRAVIS_OS_NAME == "osx" ]; then
+  OSINFO="macOS $TRAVIS_OSX_IMAGE"
+else
+  OSINFO=$(lsb_release -a | grep Description: | xargs)
+  OSINFO=${OSINFO#*: }
+fi
+
 TIMESTAMP=$(date --utc +%FT%TZ)
 WEBHOOK_DATA='{
   "username": "",
@@ -56,7 +63,7 @@ WEBHOOK_DATA='{
     },
     "title": "'"$COMMIT_SUBJECT"'",
     "url": "'"$URL"'",
-    "description": "'"${COMMIT_MESSAGE//$'\n'/ }"\\n\\n"$CREDITS"'",
+    "description": "'"${COMMIT_MESSAGE//$'\n'/ }"\\n\\n"$CREDITS"\\n\\n"$OSINFO"'",
     "fields": [
       {
         "name": "Commit",
