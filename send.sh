@@ -44,7 +44,8 @@ else
 fi
 
 if [ $TRAVIS_OS_NAME == "osx" ]; then
-  OSINFO="macOS $TRAVIS_OSX_IMAGE"
+  OSINFO=$(system_profiler SPSoftwareDataType | grep System Version: | xargs)
+  OSINFO=${OSINFO#*: }
 else
   OSINFO=$(lsb_release -a | grep Description: | xargs)
   OSINFO=${OSINFO#*: }
