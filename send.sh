@@ -51,7 +51,7 @@ else
       {
         "name": "Version",
         "value": "'"$PRODUCED_VERSION"'",
-        "inline": true
+        "inline": false
       }'
 fi
 if [ "$PRODUCED_ARTIFACT_URL" == "" ]; then
@@ -61,7 +61,7 @@ else
       {
         "name": "Artifact",
         "value": "'"[\`$PRODUCED_VERSION\`]($PRODUCED_ARTIFACT_URL)"'",
-        "inline": true
+        "inline": false
       }'
 fi
 
@@ -83,12 +83,12 @@ WEBHOOK_DATA='{
       {
         "name": "Commit",
         "value": "'"[\`${TRAVIS_COMMIT:0:7}\`](https://github.com/$TRAVIS_REPO_SLUG/commit/$TRAVIS_COMMIT)"'",
-        "inline": true
+        "inline": false
       },
       {
         "name": "Branch",
         "value": "'"[\`$TRAVIS_BRANCH\`](https://github.com/$TRAVIS_REPO_SLUG/tree/$TRAVIS_BRANCH)"'",
-        "inline": true
+        "inline": false
       }'"$PRODUCED_VERSION_DATA $PRODUCED_ARTIFACT_DATA"'
     ],
     "timestamp": "'"$TIMESTAMP"'"
