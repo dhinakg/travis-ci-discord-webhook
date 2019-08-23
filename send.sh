@@ -50,7 +50,7 @@ else
 	PRODUCED_VERSION_DATA=',
       {
         "name": "Version",
-        "value": "'"$PRODUCED_VERSION_DATA"'",
+        "value": "'"$PRODUCED_VERSION"'",
         "inline": true
       }'
 fi
@@ -60,7 +60,7 @@ else
 	PRODUCED_ARTIFACT_DATA=',
       {
         "name": "Artifact",
-        "value": "'"[\`$PRODUCED_VERSION_DATA\`]($PRODUCED_ARTIFACT_URL)"'",
+        "value": "'"[\`$PRODUCED_VERSION\`]($PRODUCED_ARTIFACT_URL)"'",
         "inline": true
       }'
 fi
