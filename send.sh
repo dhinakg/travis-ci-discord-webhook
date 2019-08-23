@@ -30,8 +30,8 @@ AUTHOR_NAME="$(git log -1 "$TRAVIS_COMMIT" --pretty="%aN")"
 COMMITTER_NAME="$(git log -1 "$TRAVIS_COMMIT" --pretty="%cN")"
 COMMIT_SUBJECT="$(git log -1 "$TRAVIS_COMMIT" --pretty="%s")"
 COMMIT_MESSAGE="$(git log -1 "$TRAVIS_COMMIT" --pretty="%b")" | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g'
-PRODUCED_VERSION = "$3"
-PRODUCED_ARTIFACT_URL = "$4"
+PRODUCED_VERSION="$3"
+PRODUCED_ARTIFACT_URL="$4"
 
 if [ "$AUTHOR_NAME" == "$COMMITTER_NAME" ]; then
   CREDITS="$AUTHOR_NAME authored & committed"
@@ -45,9 +45,9 @@ else
   URL=""
 fi
 if [ "$PRODUCED_VERSION" == "" ]; then
-	PRODUCED_VERSION_DATA = ""
+	PRODUCED_VERSION_DATA=""
 else 
-	PRODUCED_VERSION_DATA = ',
+	PRODUCED_VERSION_DATA=',
       {
         "name": "Artifact",
         "value": "'"[\`$PRODUCED_VERSION_DATA\`]($PRODUCED_ARTIFACT_URL)"'",
@@ -84,6 +84,8 @@ WEBHOOK_DATA='{
     "timestamp": "'"$TIMESTAMP"'"
   } ]
 }'
+
+echo $WEBHOOK_DATA
 
 (curl --fail --progress-bar -A "TravisCI-Webhook" -H Content-Type:application/json -H X-Author:k3rn31p4nic#8383 -d "${WEBHOOK_DATA//	/ }" "$2" \
   && echo -e "\\n[Webhook]: Successfully sent the webhook.") || echo -e "\\n[Webhook]: Unable to send webhook."
