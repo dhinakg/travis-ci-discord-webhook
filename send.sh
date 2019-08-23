@@ -49,6 +49,16 @@ if [ "$PRODUCED_VERSION" == "" ]; then
 else 
 	PRODUCED_VERSION_DATA=',
       {
+        "name": "Version",
+        "value": "'"$PRODUCED_VERSION_DATA"'",
+        "inline": true
+      }'
+fi
+if [ "$PRODUCED_ARTIFACT_URL" == "" ]; then
+	PRODUCED_ARTIFACT_DATA=""
+else 
+	PRODUCED_ARTIFACT_DATA=',
+      {
         "name": "Artifact",
         "value": "'"[\`$PRODUCED_VERSION_DATA\`]($PRODUCED_ARTIFACT_URL)"'",
         "inline": true
@@ -79,7 +89,7 @@ WEBHOOK_DATA='{
         "name": "Branch",
         "value": "'"[\`$TRAVIS_BRANCH\`](https://github.com/$TRAVIS_REPO_SLUG/tree/$TRAVIS_BRANCH)"'",
         "inline": true
-      }'"$PRODUCED_VERSION_DATA"'
+      }'"$PRODUCED_VERSION_DATA $PRODUCED_ARTIFACT_DATA"'
     ],
     "timestamp": "'"$TIMESTAMP"'"
   } ]
