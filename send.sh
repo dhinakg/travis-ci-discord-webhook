@@ -30,6 +30,8 @@ AUTHOR_NAME="$(git log -1 "$TRAVIS_COMMIT" --pretty="%aN")"
 COMMITTER_NAME="$(git log -1 "$TRAVIS_COMMIT" --pretty="%cN")"
 COMMIT_SUBJECT="$(git log -1 "$TRAVIS_COMMIT" --pretty="%s")"
 COMMIT_MESSAGE="$(git log -1 "$TRAVIS_COMMIT" --pretty="%b")" | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g'
+PRODUCED_VERSION="$3"
+PRODUCED_ARTIFACT_URL="$4"
 
 if [ "$AUTHOR_NAME" == "$COMMITTER_NAME" ]; then
   CREDITS="$AUTHOR_NAME authored & committed"
@@ -41,6 +43,26 @@ if [[ $TRAVIS_PULL_REQUEST != false ]]; then
   URL="https://github.com/$TRAVIS_REPO_SLUG/pull/$TRAVIS_PULL_REQUEST"
 else
   URL=""
+fi
+if [ "$PRODUCED_VERSION" == "" ]; then
+	PRODUCED_VERSION_DATA=""
+else 
+	PRODUCED_VERSION_DATA=',
+      {
+        "name": "Version",
+        "value": "'"$PRODUCED_VERSION"'",
+        "inline": false
+      }'
+fi
+if [ "$PRODUCED_ARTIFACT_URL" == "" ]; then
+	PRODUCED_ARTIFACT_DATA=""
+else 
+	PRODUCED_ARTIFACT_DATA=',
+      {
+        "name": "Artifact",
+        "value": "'"[\`$PRODUCED_VERSION\`]($PRODUCED_ARTIFACT_URL)"'",
+        "inline": false
+      }'
 fi
 
 if [ $TRAVIS_OS_NAME == "osx" ]; then
@@ -80,13 +102,13 @@ WEBHOOK_DATA='{
       {
         "name": "Commit",
         "value": "'"[\`${TRAVIS_COMMIT:0:7}\`](https://github.com/$TRAVIS_REPO_SLUG/commit/$TRAVIS_COMMIT)"'",
-        "inline": true
+        "inline": false
       },
       {
         "name": "Branch",
         "value": "'"[\`$TRAVIS_BRANCH\`](https://github.com/$TRAVIS_REPO_SLUG/tree/$TRAVIS_BRANCH)"'",
-        "inline": true
-      }
+        "inline": false
+      }'"$PRODUCED_VERSION_DATA $PRODUCED_ARTIFACT_DATA"'
     ],
     "timestamp": "'"$TIMESTAMP"'"
   } ]
