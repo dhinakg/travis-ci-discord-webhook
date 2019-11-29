@@ -102,12 +102,12 @@ WEBHOOK_DATA='{
       {
         "name": "Commit",
         "value": "'"[\`${TRAVIS_COMMIT:0:7}\`](https://github.com/$TRAVIS_REPO_SLUG/commit/$TRAVIS_COMMIT)"'",
-        "inline": false
+        "inline": true
       },
       {
         "name": "Branch",
         "value": "'"[\`$TRAVIS_BRANCH\`](https://github.com/$TRAVIS_REPO_SLUG/tree/$TRAVIS_BRANCH)"'",
-        "inline": false
+        "inline": true
       }'"$PRODUCED_VERSION_DATA $PRODUCED_ARTIFACT_DATA"'
     ],
     "timestamp": "'"$TIMESTAMP"'"
