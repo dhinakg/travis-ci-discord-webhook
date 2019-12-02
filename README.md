@@ -1,6 +1,4 @@
 # Travis CI 🡒 Discord Webhook
-[![Backers on Open Collective](https://opencollective.com/discordhooks/backers/badge.svg)](#backers)
- [![Sponsors on Open Collective](https://opencollective.com/discordhooks/sponsors/badge.svg)](#sponsors) 
 
 If you are looking for a way to get build (success/fail) status reports from
 [Travis CI](https://travis-ci.com) in [Discord](https://discordapp.com), stop
@@ -34,11 +32,11 @@ just follow the guide below and stay notified of your build status.
 
     ```yaml
     after_success:
-      - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+      - wget https://raw.githubusercontent.com/dhinakg/travis-ci-discord-webhook/master/send.sh
       - chmod +x send.sh
       - ./send.sh success $WEBHOOK_URL
     after_failure:
-      - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+      - wget https://raw.githubusercontent.com/dhinakg/travis-ci-discord-webhook/master/send.sh
       - chmod +x send.sh
       - ./send.sh failure $WEBHOOK_URL
     ```
@@ -54,30 +52,3 @@ please consider opening an issue and I'll fix it ASAP.
 ### See Also
 -  [AppVeyor -> Discord Webhook](https://github.com/DiscordHooks/appveyor-discord-webhook)
 -  [GitLab CI -> Discord Webhook](https://github.com/DiscordHooks/gitlab-ci-discord-webhook)
-
-## Contributors
-
-This project exists thanks to all the people who contribute. <img src="https://opencollective.com/DiscordHooks/contributors.svg?width=890&button=false" />
-
-
-## Backers
-
-Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/DiscordHooks#backer)]
-
-<a href="https://opencollective.com/DiscordHooks#backers" target="_blank"><img src="https://opencollective.com/DiscordHooks/backers.svg?width=890"></a>
-
-
-## Sponsors
-
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/DiscordHooks#sponsor)]
-
-<a href="https://opencollective.com/DiscordHooks/sponsor/0/website" target="_blank"><img src="https://opencollective.com/DiscordHooks/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/DiscordHooks/sponsor/1/website" target="_blank"><img src="https://opencollective.com/DiscordHooks/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/DiscordHooks/sponsor/2/website" target="_blank"><img src="https://opencollective.com/DiscordHooks/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/DiscordHooks/sponsor/3/website" target="_blank"><img src="https://opencollective.com/DiscordHooks/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/DiscordHooks/sponsor/4/website" target="_blank"><img src="https://opencollective.com/DiscordHooks/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/DiscordHooks/sponsor/5/website" target="_blank"><img src="https://opencollective.com/DiscordHooks/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/DiscordHooks/sponsor/6/website" target="_blank"><img src="https://opencollective.com/DiscordHooks/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/DiscordHooks/sponsor/7/website" target="_blank"><img src="https://opencollective.com/DiscordHooks/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/DiscordHooks/sponsor/8/website" target="_blank"><img src="https://opencollective.com/DiscordHooks/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/DiscordHooks/sponsor/9/website" target="_blank"><img src="https://opencollective.com/DiscordHooks/sponsor/9/avatar.svg"></a>
