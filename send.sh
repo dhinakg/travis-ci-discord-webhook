@@ -18,6 +18,12 @@ case $1 in
     STATUS_MESSAGE="Failed"
     AVATAR="https://travis-ci.org/images/logos/TravisCI-Mascot-red.png"
     ;;
+  
+  "started" )
+    EMBED_COLOR=6908265
+    STATUS_MESSAGE="Started"
+    AVATAR="https://travis-ci.org/images/logos/TravisCI-Mascot-1.png"
+    ;;
 
   * )
     EMBED_COLOR=0
@@ -114,5 +120,5 @@ WEBHOOK_DATA='{
   } ]
 }'
 
-(curl --fail --progress-bar -A "TravisCI-Webhook" -H Content-Type:application/json -H X-Author:k3rn31p4nic#8383 -d "${WEBHOOK_DATA//	/ }" "$2" \
+(curl --fail --progress-bar -A "TravisCI-Webhook" -H Content-Type:application/json -d "${WEBHOOK_DATA//	/ }" "$2" \
   && echo -e "\\n[Webhook]: Successfully sent the webhook.") || echo -e "\\n[Webhook]: Unable to send webhook."
