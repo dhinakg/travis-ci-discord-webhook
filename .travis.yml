@@ -36,6 +36,7 @@ install:
   - chmod +x send.sh
 
 script:
+  - ./send.sh started $WEBHOOK_URL
   - ./send.sh success $WEBHOOK_URL
   - ./send.sh failure $WEBHOOK_URL
   - ./send.sh error $WEBHOOK_URL
