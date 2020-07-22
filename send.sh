@@ -39,6 +39,16 @@ COMMIT_MESSAGE="$(git log -1 "$TRAVIS_COMMIT" --pretty="%b")" | sed -E ':a;N;$!b
 PRODUCED_VERSION="$3"
 PRODUCED_ARTIFACT_URL="$4"
 
+if [ ${#COMMIT_SUBJECT} -gt 256 ]; then
+  COMMIT_SUBJECT="$(echo "$COMMIT_SUBJECT" | cut -c 1-253)"
+  COMMIT_SUBJECT+="..."
+fi
+
+if [ -n $COMMIT_MESSAGE ] && [ ${#COMMIT_MESSAGE} -gt 1900 ]; then
+  COMMIT_MESSAGE="$(echo "$COMMIT_MESSAGE" | cut -c 1-1900)"
+  COMMIT_MESSAGE+="..."
+fi
+
 if [ "$AUTHOR_NAME" == "$COMMITTER_NAME" ]; then
   CREDITS="$AUTHOR_NAME authored & committed"
 else
